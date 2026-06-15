@@ -1,35 +1,51 @@
+const bcrypt = require("bcryptjs");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 
-const registerStudent = (req, res) => {
+const registerStudent = async (req, res) => {
+
   const { name, email, password, branch, cgpa } = req.body;
 
-  const sql =
-    "INSERT INTO students(name,email,password,branch,cgpa) VALUES (?,?,?,?,?)";
+  try {
 
-  db.query(
-    sql,
-    [name, email, password, branch, cgpa],
-    (err, result) => {
-      if (err) {
-        return res.status(500).json(err);
+    const hashedPassword =
+      await bcrypt.hash(password, 10);
+
+    const sql =
+      "INSERT INTO students(name,email,password,branch,cgpa) VALUES (?,?,?,?,?)";
+
+    db.query(
+      sql,
+      [name, email, hashedPassword, branch, cgpa],
+      (err, result) => {
+
+        if (err) {
+          return res.status(500).json(err);
+        }
+
+        res.json({
+          message: "Student Registered Successfully"
+        });
+
       }
+    );
 
-      res.json({
-        message: "Student Registered Successfully"
-      });
-    }
-  );
+  } catch (error) {
+
+    res.status(500).json(error);
+
+  }
 };
 
-const loginStudent = (req, res) => {
+  
+const loginStudent = async (req, res) => {
 
   const { email, password } = req.body;
 
   const sql =
     "SELECT * FROM students WHERE email=?";
 
-  db.query(sql, [email], (err, result) => {
+  db.query(sql, [email], async (err, result) => {
 
     if (err) {
       return res.status(500).json(err);
@@ -43,7 +59,12 @@ const loginStudent = (req, res) => {
 
     const student = result[0];
 
-    if (student.password !== password) {
+    const isMatch = await bcrypt.compare(
+      password,
+      student.password
+    );
+
+    if (!isMatch) {
       return res.status(401).json({
         message: "Invalid Password"
       });
