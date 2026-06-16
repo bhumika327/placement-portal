@@ -89,8 +89,51 @@ const loginStudent = async (req, res) => {
   });
 
 };
+const getProfile = (req, res) => {
 
+  const sql =
+    "SELECT id,name,email,branch,cgpa FROM students WHERE id=?";
+
+  db.query(
+    sql,
+    [req.user.id],
+    (err, result) => {
+
+      if (err) {
+        return res.status(500).json(err);
+      }
+
+      res.json(result[0]);
+
+    }
+  );
+};
+const updateProfile = (req, res) => {
+
+  const { name, branch, cgpa } = req.body;
+
+  const sql =
+    "UPDATE students SET name=?, branch=?, cgpa=? WHERE id=?";
+
+  db.query(
+    sql,
+    [name, branch, cgpa, req.user.id],
+    (err, result) => {
+
+      if (err) {
+        return res.status(500).json(err);
+      }
+
+      res.json({
+        message: "Profile Updated Successfully"
+      });
+
+    }
+  );
+};
 module.exports = {
   registerStudent,
-  loginStudent
+  loginStudent,
+  getProfile,
+  updateProfile
 };

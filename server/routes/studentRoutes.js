@@ -1,18 +1,30 @@
+const {
+  registerStudent,
+  loginStudent,
+  getProfile,
+  updateProfile
+} = require("../controllers/studentController");
 const express = require("express");
 
 const router = express.Router();
 
-const {
-  registerStudent,
-  loginStudent
-} = require("../controllers/studentController");
 
-const verifyToken = require("../middleware/authMiddleware");
+
+ const verifyToken = require("../middleware/authMiddleware");
 
 router.post("/register", registerStudent);
 
-router.post("/login", loginStudent);
-
+ router.post("/login", loginStudent);
+router.get(
+  "/profile",
+  verifyToken,
+  getProfile
+);
+router.put(
+  "/profile",
+  verifyToken,
+  updateProfile
+);
 router.get(
   "/dashboard",
   verifyToken,
