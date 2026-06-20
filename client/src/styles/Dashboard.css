@@ -1,0 +1,33 @@
+.dashboard{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  background:#f4f6f9;
+}
+
+.profile-card{
+  background:white;
+  width:400px;
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0px 4px 10px rgba(0,0,0,0.2);
+}
+
+.profile-card h1{
+  text-align:center;
+  color:#2563eb;
+}
+
+.profile-card p{
+  font-size:18px;
+}
+
+.logout-btn{
+  width:100%;
+  padding:10px;
+  background:red;
+  color:white;
+  border:none;
+  cursor:pointer;
+}

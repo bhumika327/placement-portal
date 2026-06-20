@@ -1,3 +1,4 @@
+import "../styles/Login.css";
 import { useState } from "react";
 import axios from "axios";
 
@@ -35,34 +36,36 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Placement Portal Login</h1>
+  <div className="login-container">
+
+    <div className="login-card">
+
+      <h1>Placement Portal</h1>
 
       <form onSubmit={handleLogin}>
 
         <input
           type="email"
           placeholder="Enter Email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e)=>setEmail(e.target.value)}
         />
-
-        <br /><br />
 
         <input
           type="password"
           placeholder="Enter Password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e)=>setPassword(e.target.value)}
         />
-
-        <br /><br />
 
         <button type="submit">
           Login
         </button>
 
       </form>
+
     </div>
-  );
+
+  </div>
+);
 }
 
 export default Login;

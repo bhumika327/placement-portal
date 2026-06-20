@@ -3,16 +3,11 @@ import Dashboard from "./pages/Dashboard";
 
 function App() {
 
-  const token =
-    localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   return (
     <>
-      {
-        token
-          ? <Dashboard />
-          : <Login />
-      }
+      {token ? <Dashboard /> : <Login />}
     </>
   );
 }
