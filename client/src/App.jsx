@@ -1,14 +1,20 @@
-import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Companies from "./pages/Companies";
+import Login from "./pages/Login";
 
 function App() {
 
   const token = localStorage.getItem("token");
 
+  if (!token) {
+    return <Login />;
+  }
+
   return (
-    <>
-      {token ? <Dashboard /> : <Login />}
-    </>
+    <div>
+      <Dashboard />
+      <Companies />
+    </div>
   );
 }
 
