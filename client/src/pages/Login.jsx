@@ -1,11 +1,14 @@
 import "../styles/Login.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
 
@@ -26,9 +29,13 @@ function Login() {
         res.data.token
       );
 
-      window.location.reload();
+      alert("Login Successful");
+
+      navigate("/dashboard");
 
     } catch (err) {
+
+      console.log(err);
 
       alert("Login Failed");
 
@@ -36,36 +43,44 @@ function Login() {
   };
 
   return (
-  <div className="login-container">
+    <div className="login-container">
 
-    <div className="login-card">
+      <div className="login-card">
 
-      <h1>Placement Portal</h1>
+        <h1>Placement Portal</h1>
 
-      <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin}>
 
-        <input
-          type="email"
-          placeholder="Enter Email"
-          onChange={(e)=>setEmail(e.target.value)}
-        />
+          <input
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) =>
+              setEmail(e.target.value)
+            }
+            required
+          />
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          onChange={(e)=>setPassword(e.target.value)}
-        />
+          <input
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
+            required
+          />
 
-        <button type="submit">
-          Login
-        </button>
+          <button type="submit">
+            Login
+          </button>
 
-      </form>
+        </form>
+
+      </div>
 
     </div>
-
-  </div>
-);
+  );
 }
 
 export default Login;
