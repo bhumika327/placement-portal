@@ -17,6 +17,11 @@ function Sidebar() {
       </h2>
 
       <ul className="space-y-4">
+        <li>
+  <Link to="/admin">
+    Admin
+  </Link>
+</li>
 
         <li>
           <Link to="/dashboard">

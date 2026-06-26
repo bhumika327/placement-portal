@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Companies from "./pages/Companies";
 import MyApplications from "./pages/MyApplications";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function Layout({ children }) {
   return (
@@ -76,6 +77,18 @@ function App() {
             )
           }
         />
+        <Route
+  path="/admin"
+  element={
+    token ? (
+      <Layout>
+        <AdminDashboard />
+      </Layout>
+    ) : (
+      <Login />
+    )
+  }
+/>
 
       </Routes>
 
