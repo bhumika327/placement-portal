@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {
+  FaBuilding,
+  FaFileAlt,
+  FaGraduationCap,
+  FaUserCircle,
+  FaEnvelope,
+  FaCodeBranch
+} from "react-icons/fa";
 
 function Dashboard() {
   const [student, setStudent] = useState({});
@@ -27,85 +35,152 @@ function Dashboard() {
     fetchProfile();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.reload();
-  };
-
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen bg-gray-100 p-8">
 
-      <nav className="bg-blue-600 text-white p-4 shadow-md">
-        <h1 className="text-2xl font-bold">
-          Placement Portal
-        </h1>
-      </nav>
+      {/* Welcome Section */}
 
-      <div className="max-w-6xl mx-auto p-6">
+      <div className="mb-8">
 
-        <h2 className="text-3xl font-bold mb-6">
+        <h1 className="text-4xl font-bold text-gray-800">
           Welcome, {student.name} 👋
-        </h2>
+        </h1>
 
-        <div className="grid md:grid-cols-3 gap-4 mb-8">
+        <p className="text-gray-500 mt-2">
+          Here's an overview of your placement activities.
+        </p>
 
-          <div className="bg-white p-6 rounded-2xl shadow">
-            <h3 className="text-gray-500">
-              Companies
-            </h3>
-            <p className="text-3xl font-bold text-blue-600">
-              15
-            </p>
-          </div>
+      </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow">
-            <h3 className="text-gray-500">
-              Applied
-            </h3>
-            <p className="text-3xl font-bold text-green-600">
-              4
-            </p>
-          </div>
+      {/* Dashboard Cards */}
 
-          <div className="bg-white p-6 rounded-2xl shadow">
-            <h3 className="text-gray-500">
-              CGPA
-            </h3>
-            <p className="text-3xl font-bold text-purple-600">
-              {student.cgpa}
-            </p>
-          </div>
+      <div className="grid md:grid-cols-3 gap-6 mb-10">
+
+        <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-2xl shadow-xl p-6 hover:scale-105 transition duration-300">
+
+          <FaBuilding size={35} />
+
+          <h2 className="text-xl font-semibold mt-4">
+            Companies
+          </h2>
+
+          <p className="text-4xl font-bold mt-3">
+            15
+          </p>
 
         </div>
 
-        <div className="bg-white rounded-2xl shadow p-6">
+        <div className="bg-gradient-to-r from-green-500 to-green-700 text-white rounded-2xl shadow-xl p-6 hover:scale-105 transition duration-300">
 
-          <h3 className="text-2xl font-bold mb-4">
-            Student Profile
-          </h3>
+          <FaFileAlt size={35} />
 
-          <p className="mb-2">
-            <strong>Name:</strong> {student.name}
+          <h2 className="text-xl font-semibold mt-4">
+            Applications
+          </h2>
+
+          <p className="text-4xl font-bold mt-3">
+            4
           </p>
 
-          <p className="mb-2">
-            <strong>Email:</strong> {student.email}
+        </div>
+
+        <div className="bg-gradient-to-r from-purple-500 to-purple-700 text-white rounded-2xl shadow-xl p-6 hover:scale-105 transition duration-300">
+
+          <FaGraduationCap size={35} />
+
+          <h2 className="text-xl font-semibold mt-4">
+            CGPA
+          </h2>
+
+          <p className="text-4xl font-bold mt-3">
+            {student.cgpa}
           </p>
 
-          <p className="mb-2">
-            <strong>Branch:</strong> {student.branch}
-          </p>
+        </div>
 
-          <p className="mb-4">
-            <strong>CGPA:</strong> {student.cgpa}
-          </p>
+      </div>
 
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg"
-          >
-            Logout
-          </button>
+      {/* Student Profile */}
+
+      <div className="bg-white rounded-3xl shadow-xl p-8">
+
+        <h2 className="text-3xl font-bold text-gray-800 mb-8">
+          Student Profile
+        </h2>
+
+        <div className="space-y-6">
+
+          <div className="flex items-center justify-between border-b pb-4">
+
+            <div className="flex items-center gap-3">
+
+              <FaUserCircle className="text-blue-600 text-2xl" />
+
+              <span className="font-semibold">
+                Name
+              </span>
+
+            </div>
+
+            <span className="text-gray-700">
+              {student.name}
+            </span>
+
+          </div>
+
+          <div className="flex items-center justify-between border-b pb-4">
+
+            <div className="flex items-center gap-3">
+
+              <FaEnvelope className="text-green-600 text-xl" />
+
+              <span className="font-semibold">
+                Email
+              </span>
+
+            </div>
+
+            <span className="text-gray-700">
+              {student.email}
+            </span>
+
+          </div>
+
+          <div className="flex items-center justify-between border-b pb-4">
+
+            <div className="flex items-center gap-3">
+
+              <FaCodeBranch className="text-purple-600 text-xl" />
+
+              <span className="font-semibold">
+                Branch
+              </span>
+
+            </div>
+
+            <span className="text-gray-700">
+              {student.branch}
+            </span>
+
+          </div>
+
+          <div className="flex items-center justify-between">
+
+            <div className="flex items-center gap-3">
+
+              <FaGraduationCap className="text-orange-500 text-xl" />
+
+              <span className="font-semibold">
+                CGPA
+              </span>
+
+            </div>
+
+            <span className="font-bold text-lg text-blue-600">
+              {student.cgpa}
+            </span>
+
+          </div>
 
         </div>
 

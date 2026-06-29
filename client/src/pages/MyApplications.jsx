@@ -3,8 +3,7 @@ import axios from "axios";
 
 function MyApplications() {
 
-  const [applications, setApplications] =
-    useState([]);
+  const [applications, setApplications] = useState([]);
 
   useEffect(() => {
 
@@ -18,9 +17,10 @@ function MyApplications() {
 
         setApplications(res.data);
 
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err);
       }
+
     };
 
     fetchApplications();
@@ -32,34 +32,86 @@ function MyApplications() {
     <div className="p-6">
 
       <h1 className="text-3xl font-bold mb-6">
-        My Applications
+        My Applications 📄
       </h1>
 
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="bg-white rounded-xl shadow overflow-hidden">
 
-        {applications.map((app) => (
+        <table className="w-full">
 
-          <div
-            key={app.id}
-            className="bg-white p-4 rounded shadow"
-          >
+          <thead className="bg-blue-600 text-white">
 
-            <h2 className="text-xl font-bold">
-              {app.company_name}
-            </h2>
+            <tr>
 
-            <p>{app.role}</p>
+              <th className="p-4 text-left">
+                Company
+              </th>
 
-            <p>{app.package} LPA</p>
+              <th className="p-4 text-left">
+                Role
+              </th>
 
-          </div>
+              <th className="p-4 text-left">
+                Package
+              </th>
 
-        ))}
+              <th className="p-4 text-left">
+                Status
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            {applications.map((item) => (
+
+              <tr
+                key={item.id}
+                className="border-b"
+              >
+
+                <td className="p-4">
+                  {item.company_name}
+                </td>
+
+                <td className="p-4">
+                  {item.role}
+                </td>
+
+                <td className="p-4">
+                  {item.package} LPA
+                </td>
+
+             <td className="p-4">
+  <span
+    className={`px-3 py-1 rounded-full text-white ${
+      item.status === "Selected"
+        ? "bg-green-600"
+        : item.status === "Rejected"
+        ? "bg-red-600"
+        : "bg-yellow-500"
+    }`}
+  >
+    {item.status}
+  </span>
+</td>
+
+              </tr>
+
+            ))}
+
+          </tbody>
+
+        </table>
 
       </div>
 
     </div>
+
   );
+
 }
 
 export default MyApplications;

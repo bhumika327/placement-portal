@@ -66,5 +66,6 @@ const addCompany = (req, res) => {
 };
 module.exports = {
   getCompanies,
+  addCompany,
   deleteCompany
 };

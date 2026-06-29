@@ -4,6 +4,7 @@ const router = express.Router();
 
 const {
   getCompanies,
+  addCompany,
   deleteCompany
 } = require("../controllers/companyController");
 router.get("/", getCompanies);
