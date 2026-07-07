@@ -8,37 +8,60 @@ function AdminDashboard() {
   const [role, setRole] = useState("");
   const [packageValue, setPackageValue] = useState("");
   const [cgpa, setCgpa] = useState("");
+  const [editId, setEditId] = useState(null);
 
   const handleSubmit = async (e) => {
 
     e.preventDefault();
+try {
 
-    try {
+  if (editId) {
 
-      await axios.post(
-        "http://localhost:5000/api/companies",
-        {
-          company_name: companyName,
-          role,
-          package: packageValue,
-         eligibility_cgpa: cgpa
-        }
-      );
+    await axios.put(
+      `http://localhost:5000/api/companies/${editId}`,
+      {
+        company_name: companyName,
+        role,
+        package: packageValue,
+        eligibility_cgpa: cgpa
+      }
+    );
 
-      alert("Company Added Successfully!");
-      fetchCompanies();
+    alert("Company Updated Successfully!");
 
-      setCompanyName("");
-      setRole("");
-      setPackageValue("");
-      setCgpa("");
+    setEditId(null);
 
-    } catch (err) {
+  } else {
 
-      console.log(err);
-      alert("Error adding company");
+    await axios.post(
+      "http://localhost:5000/api/companies",
+      {
+        company_name: companyName,
+        role,
+        package: packageValue,
+        eligibility_cgpa: cgpa
+      }
+    );
 
-    }
+    alert("Company Added Successfully!");
+
+  }
+
+  fetchCompanies();
+
+  setCompanyName("");
+  setRole("");
+  setPackageValue("");
+  setCgpa("");
+
+} catch (err) {
+
+  console.log(err);
+
+  alert("Error");
+
+}
+
   };
   const fetchCompanies = async () => {
 
@@ -123,12 +146,11 @@ const handleDelete = async (id) => {
           value={cgpa}
           onChange={(e)=>setCgpa(e.target.value)}
         />
-
-        <button
-          className="bg-blue-600 text-white px-6 py-3 rounded w-full hover:bg-blue-700"
-        >
-          Add Company
-        </button>
+<button
+  className="bg-blue-600 text-white px-6 py-3 rounded w-full hover:bg-blue-700"
+>
+  {editId ? "Update Company" : "Add Company"}
+</button>
 
       </form>
       <h2 className="text-2xl font-bold mt-10 mb-4">
@@ -178,7 +200,26 @@ const handleDelete = async (id) => {
         <td>
           {company.eligibility_cgpa || company.min_cgpa}
         </td>
-        <td>
+  <td className="space-x-2">
+
+<button
+  onClick={() => {
+
+    setEditId(company.id);
+
+    setCompanyName(company.company_name);
+
+    setRole(company.role);
+
+    setPackageValue(company.package);
+
+    setCgpa(company.eligibility_cgpa);
+
+  }}
+  className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+>
+  Edit
+</button>
 
   <button
     onClick={() => handleDelete(company.id)}

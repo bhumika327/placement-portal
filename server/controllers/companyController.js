@@ -33,6 +33,50 @@ const deleteCompany = (req, res) => {
   });
 
 };
+const updateCompany = (req, res) => {
+
+  const { id } = req.params;
+
+  const {
+    company_name,
+    role,
+    package,
+    eligibility_cgpa
+  } = req.body;
+
+  const sql = `
+    UPDATE companies
+    SET
+      company_name=?,
+      role=?,
+      package=?,
+      eligibility_cgpa=?
+    WHERE id=?
+  `;
+
+  db.query(
+    sql,
+    [
+      company_name,
+      role,
+      package,
+      eligibility_cgpa,
+      id
+    ],
+    (err) => {
+
+      if (err) {
+        return res.status(500).json(err);
+      }
+
+      res.json({
+        message: "Company Updated Successfully"
+      });
+
+    }
+  );
+
+};
 const addCompany = (req, res) => {
 
   const {
@@ -67,5 +111,6 @@ const addCompany = (req, res) => {
 module.exports = {
   getCompanies,
   addCompany,
-  deleteCompany
+  deleteCompany,
+  updateCompany
 };

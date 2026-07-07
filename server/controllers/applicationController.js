@@ -66,8 +66,85 @@ applications.status
   });
 
 };
+const getAllApplications = (req, res) => {
+
+  const sql = `
+    SELECT
+      applications.id,
+      students.name,
+      students.email,
+      companies.company_name,
+      companies.role,
+      applications.status
+    FROM applications
+    JOIN students
+      ON applications.student_id = students.id
+    JOIN companies
+      ON applications.company_id = companies.id
+  `;
+
+  db.query(sql, (err, result) => {
+
+    if (err) {
+      return res.status(500).json(err);
+    }
+
+    res.json(result);
+
+  });
+
+};
+const updateApplicationStatus = (req, res) => {
+
+  const { id } = req.params;
+  const { status } = req.body;
+
+  const sql =
+    "UPDATE applications SET status=? WHERE id=?";
+
+  db.query(
+    sql,
+    [status, id],
+    (err) => {
+
+      if (err) {
+        return res.status(500).json(err);
+      }
+
+      res.json({
+        message: "Status Updated Successfully"
+      });
+
+    }
+  );
+
+};
+const updateStatus = (req, res) => {
+
+  const { id } = req.params;
+  const { status } = req.body;
+
+  const sql =
+    "UPDATE applications SET status=? WHERE id=?";
+
+  db.query(sql, [status, id], (err) => {
+
+    if (err) {
+      return res.status(500).json(err);
+    }
+
+    res.json({
+      message: "Status Updated"
+    });
+
+  });
+
+};
 
 module.exports = {
   applyCompany,
-  getMyApplications
+  getMyApplications,
+    getAllApplications,
+  updateApplicationStatus,
+   updateStatus
 };

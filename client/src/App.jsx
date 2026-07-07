@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Companies from "./pages/Companies";
 import MyApplications from "./pages/MyApplications";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminApplications from "./pages/AdminApplications";
 
 function Layout({ children }) {
   return (
@@ -88,6 +89,10 @@ function App() {
       <Login />
     )
   }
+/>
+<Route
+  path="/admin/applications"
+  element={<AdminApplications />}
 />
 
       </Routes>
