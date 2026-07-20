@@ -6,7 +6,9 @@ const companyRoutes =
 require("./routes/companyRoutes");
 const applicationRoutes =
 require("./routes/applicationRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const app = express();
+
 
 app.use(cors());
 app.use(express.json());
@@ -22,6 +24,7 @@ app.use(
   "/api/companies",
   companyRoutes
 );
+app.use("/api/admin", adminRoutes);
 
 app.listen(5000, () => {
   console.log("Server Running on Port 5000");
