@@ -131,9 +131,39 @@ const updateProfile = (req, res) => {
     }
   );
 };
+const uploadResume = (req, res) => {
+
+  const { id } = req.params;
+
+  if (!req.file) {
+    return res.status(400).json({
+      message: "No file uploaded"
+    });
+  }
+
+  const resume = req.file.filename;
+
+  const sql =
+    "UPDATE students SET resume=? WHERE id=?";
+
+  db.query(sql, [resume, id], (err) => {
+
+    if (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+
+    res.json({
+      message: "Resume uploaded successfully"
+    });
+
+  });
+
+};
 module.exports = {
   registerStudent,
   loginStudent,
   getProfile,
-  updateProfile
+  updateProfile,
+  uploadResume
 };

@@ -10,34 +10,56 @@ function Sidebar() {
   };
 
   return (
-    <div className="w-64 min-h-screen bg-gray-900 text-white p-4">
+    <div className="w-64 min-h-screen bg-gray-900 text-white p-6">
 
-      <h2 className="text-xl font-bold mb-6">
-        Menu
+      <h2 className="text-2xl font-bold mb-8">
+        📚 Menu
       </h2>
 
-      <ul className="space-y-4">
-        <li>
-  <Link to="/admin">
-    Admin
-  </Link>
-</li>
+      <ul className="space-y-5">
 
         <li>
-          <Link to="/dashboard">
-            Dashboard
+          <Link
+            to="/dashboard"
+            className="hover:text-blue-400"
+          >
+            🏠 Dashboard
           </Link>
         </li>
 
         <li>
-          <Link to="/companies">
-            Companies
+          <Link
+            to="/companies"
+            className="hover:text-blue-400"
+          >
+            🏢 Companies
           </Link>
         </li>
 
         <li>
-          <Link to="/my-applications">
-            My Applications
+          <Link
+            to="/my-applications"
+            className="hover:text-blue-400"
+          >
+            📄 My Applications
+          </Link>
+        </li>
+
+        <li>
+          <Link
+            to="/profile"
+            className="hover:text-blue-400"
+          >
+            👤 My Profile
+          </Link>
+        </li>
+
+        <li>
+          <Link
+            to="/admin"
+            className="hover:text-blue-400"
+          >
+            🛠 Admin Dashboard
           </Link>
         </li>
 
@@ -45,7 +67,7 @@ function Sidebar() {
 
       <button
         onClick={handleLogout}
-        className="mt-8 bg-red-600 px-4 py-2 rounded"
+        className="mt-10 w-full bg-red-600 hover:bg-red-700 py-2 rounded"
       >
         Logout
       </button>

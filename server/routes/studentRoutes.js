@@ -2,12 +2,13 @@ const {
   registerStudent,
   loginStudent,
   getProfile,
-  updateProfile
+  updateProfile,
+    uploadResume
 } = require("../controllers/studentController");
 const express = require("express");
 
 const router = express.Router();
-
+const upload = require("../middleware/upload");
 
 
  const verifyToken = require("../middleware/authMiddleware");
@@ -34,6 +35,11 @@ router.get(
       user: req.user
     });
   }
+);
+router.post(
+  "/upload/:id",
+  upload.single("resume"),
+  uploadResume
 );
 
 module.exports = router;

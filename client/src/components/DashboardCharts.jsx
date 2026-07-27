@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
-import { Bar, Pie } from "react-chartjs-2";
-const [statusData, setStatusData] = useState([]);
 import axios from "axios";
+
+import { Bar, Pie } from "react-chartjs-2";
 
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
+  ArcElement,
   Title,
   Tooltip,
   Legend
 } from "chart.js";
 
-import { Bar } from "react-chartjs-2";
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
+  ArcElement,
   Title,
   Tooltip,
   Legend
@@ -27,11 +27,12 @@ ChartJS.register(
 function DashboardCharts() {
 
   const [chartData, setChartData] = useState([]);
+  const [statusData, setStatusData] = useState([]);
 
   useEffect(() => {
 
     fetchChartData();
-     fetchStatusChart();
+    fetchStatusChart();
 
   }, []);
 
@@ -52,23 +53,24 @@ function DashboardCharts() {
     }
 
   };
+
   const fetchStatusChart = async () => {
 
-  try {
+    try {
 
-    const res = await axios.get(
-      "http://localhost:5000/api/admin/status-chart"
-    );
+      const res = await axios.get(
+        "http://localhost:5000/api/admin/status-chart"
+      );
 
-    setStatusData(res.data);
+      setStatusData(res.data);
 
-  } catch (err) {
+    } catch (err) {
 
-    console.log(err);
+      console.log(err);
 
-  }
+    }
 
-};
+  };
 
   const data = {
 
@@ -80,47 +82,57 @@ function DashboardCharts() {
 
         label: "Applications",
 
-        data: chartData.map(item => item.total)
+        data: chartData.map(item => item.total),
+
+        backgroundColor: "#2563eb"
 
       }
 
     ]
 
   };
-const pieData = {
 
-  labels: statusData.map(item => item.status),
+  const pieData = {
 
-  datasets: [
+    labels: statusData.map(item => item.status),
 
-    {
+    datasets: [
 
-      data: statusData.map(item => item.total)
+      {
 
-    }
+        data: statusData.map(item => item.total),
 
-  ]
+        backgroundColor: [
+          "#f59e0b",
+          "#22c55e",
+          "#ef4444"
+        ]
 
-};
+      }
+
+    ]
+
+  };
+
   return (
 
     <div className="bg-white mt-8 p-6 rounded-xl shadow">
 
-      <h2 className="text-2xl font-bold mb-4">
-        Applications by Company
+      <h2 className="text-2xl font-bold mb-6">
+        Placement Analytics
       </h2>
 
-     <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-2 gap-8">
 
-  <div>
-    <Bar data={data} />
-  </div>
+        <div>
+          <Bar data={data} />
+        </div>
 
-  <div>
-    <Pie data={pieData} />
-  </div>
+        <div>
+          <Pie data={pieData} />
+        </div>
 
-</div>
+      </div>
 
     </div>
 

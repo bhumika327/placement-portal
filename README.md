@@ -1,80 +1,141 @@
 # 🎓 Placement Portal
 
-A full-stack Placement Management System built using React, Node.js, Express.js and MySQL.
+A Full-Stack Placement Management System built using React, Node.js, Express.js, and MySQL.
 
-## 🚀 Features
-
-### Student
-
-- Login using JWT Authentication
-- Dashboard
-- View available companies
-- Search companies
-- Apply for companies
-- Prevent duplicate applications
-- View applied companies
-- Track application status
-
-### Admin
-
-- Add companies
-- Edit company details
-- Delete companies
-- View all students
-- View all applications
-- Update application status
+The project allows students to apply for placement opportunities while providing administrators with a complete dashboard to manage companies, applications, and placement analytics.
 
 ---
 
-## 🛠 Tech Stack
+# 🚀 Features
 
-Frontend
+## 👨‍🎓 Student Module
+
+- JWT Authentication
+- Student Login
+- Student Dashboard
+- View Available Companies
+- Search Companies
+- Apply for Companies
+- Duplicate Application Prevention
+- View My Applications
+- Track Application Status (Pending / Selected / Rejected)
+
+---
+
+## 👨‍💼 Admin Module
+
+- Admin Dashboard
+- Add New Companies
+- Delete Companies
+- View All Companies
+- View Student Applications
+- Update Application Status
+- Placement Analytics Dashboard
+- Dashboard Statistics Cards
+- Applications by Company (Bar Chart)
+- Application Status Distribution (Pie Chart)
+
+---
+
+# 📊 Dashboard Analytics
+
+- Total Students
+- Total Companies
+- Total Applications
+- Accepted Students
+- Rejected Students
+- Company-wise Applications Chart
+- Status-wise Applications Chart
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
 - React
-- React Router
+- React Router DOM
 - Axios
 - Tailwind CSS
+- Chart.js
+- React Chart.js 2
 
-Backend
+## Backend
+
 - Node.js
 - Express.js
 
-Database
+## Database
+
 - MySQL
 
-Authentication
-- JWT
+## Authentication
+
+- JWT Authentication
 
 ---
 
-## 📷 Screenshots
+# 📷 Screenshots
 
-### Login Page
+## Login
 
-(Add screenshot here)
+(Add Screenshot)
 
-### Dashboard
+## Student Dashboard
 
-(Add screenshot here)
+(Add Screenshot)
 
-### Companies
+## Companies
 
-(Add screenshot here)
+(Add Screenshot)
 
-### My Applications
+## My Applications
 
-(Add screenshot here)
+(Add Screenshot)
+
+## Admin Dashboard
+
+(Add Screenshot)
+
+## Analytics Dashboard
+
+(Add Screenshot)
 
 ---
 
-## Installation
+# 📂 Folder Structure
 
-### Clone Repository
+```text
+placement-portal
+│
+├── client
+│   ├── src
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── assets
+│   │   └── App.jsx
+│
+├── server
+│   ├── controllers
+│   ├── routes
+│   ├── middleware
+│   ├── db.js
+│   └── server.js
+│
+└── README.md
+```
+
+---
+
+# ⚙ Installation
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/bhumika327/placement-portal.git
 ```
 
-### Install Frontend
+## Install Frontend
 
 ```bash
 cd client
@@ -82,7 +143,7 @@ npm install
 npm run dev
 ```
 
-### Install Backend
+## Install Backend
 
 ```bash
 cd server
@@ -92,52 +153,39 @@ npm start
 
 ---
 
-## Database
+# 🗄 Database
 
 Import the SQL database into MySQL.
 
-Update your database credentials inside
+Update database credentials inside:
 
-```
+```text
 server/db.js
 ```
 
 ---
 
-## Folder Structure
-
-```
-placement-portal
-│
-├── client
-│   ├── src
-│   ├── pages
-│   ├── components
-│
-├── server
-│   ├── controllers
-│   ├── routes
-│   ├── models
-│
-└── README.md
-```
-
----
-
-## Future Improvements
+# ✨ Future Improvements
 
 - Resume Upload
-- Admin Analytics
+- Student Profile
+- Profile Picture Upload
+- Resume Download
 - Email Notifications
-- Placement Statistics
-- Student Profile Editing
-- JWT Role Authentication
+- AI Resume Analyzer
+- AI Job Recommendation
+- Interview Scheduler
+- JWT Role-Based Authorization
+- Admin Reports Export (PDF/Excel)
 
 ---
 
-## Author
+# 👩‍💻 Author
 
 **Bhumika Jain**
 
 GitHub:
 https://github.com/bhumika327
+
+LinkedIn:
+https://www.linkedin.com/in/bhumika-jain-developer/

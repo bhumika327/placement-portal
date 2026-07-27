@@ -9,6 +9,7 @@ import Companies from "./pages/Companies";
 import MyApplications from "./pages/MyApplications";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminApplications from "./pages/AdminApplications";
+import Profile from "./pages/Profile";
 
 function Layout({ children }) {
   return (
@@ -39,6 +40,18 @@ function App() {
           path="/"
           element={<Login />}
         />
+    <Route
+  path="/profile"
+  element={
+    token ? (
+      <Layout>
+        <Profile />
+      </Layout>
+    ) : (
+      <Login />
+    )
+  }
+/>
 
         <Route
           path="/dashboard"
@@ -92,7 +105,15 @@ function App() {
 />
 <Route
   path="/admin/applications"
-  element={<AdminApplications />}
+  element={
+    token ? (
+      <Layout>
+        <AdminApplications />
+      </Layout>
+    ) : (
+      <Login />
+    )
+  }
 />
 
       </Routes>
