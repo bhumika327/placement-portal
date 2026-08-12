@@ -92,7 +92,7 @@ const loginStudent = async (req, res) => {
 const getProfile = (req, res) => {
 
   const sql =
-    "SELECT id,name,email,branch,cgpa FROM students WHERE id=?";
+    "SELECT id,name,email,branch,year,cgpa,resume FROM students WHERE id=?";
 
   db.query(
     sql,
@@ -159,6 +159,48 @@ const uploadResume = (req, res) => {
 
   });
 
+};
+const dashboardStats = async (req, res) => {
+  try {
+
+    const studentId = req.user.id;
+
+    const [companies] = await db.query(
+      "SELECT COUNT(*) AS total FROM companies"
+    );
+
+    const [applications] = await db.query(
+      "SELECT COUNT(*) AS total FROM applications WHERE student_id=?",
+      [studentId]
+    );
+
+    const [pending] = await db.query(
+      "SELECT COUNT(*) AS total FROM applications WHERE student_id=? AND status='Pending'",
+      [studentId]
+    );
+
+    const [selected] = await db.query(
+      "SELECT COUNT(*) AS total FROM applications WHERE student_id=? AND status='Selected'",
+      [studentId]
+    );
+
+    const [rejected] = await db.query(
+      "SELECT COUNT(*) AS total FROM applications WHERE student_id=? AND status='Rejected'",
+      [studentId]
+    );
+
+    res.json({
+      totalCompanies: companies[0].total,
+      totalApplications: applications[0].total,
+      pending: pending[0].total,
+      selected: selected[0].total,
+      rejected: rejected[0].total
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 };
 module.exports = {
   registerStudent,
